@@ -1,1 +1,52 @@
-<h1> Get it done! </h1>
+<html>
+    <head>
+        <title>Control tag page</title>
+        <!-- BEGIN ControlTag for "Trade Me" -->
+        <script async class="kxct" data-id="J6xELiDv" data-timing="async" data-version="3.0">
+            window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
+            (function(){
+                var k=document.createElement('script');k.type='text/javascript';k.async=true;
+                k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/J6xELiDv.js';
+                var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
+            }());
+        </script>
+        <!-- END ControlTag -->
+    </head>
+    <body>
+        <script class="kxint" data-namespace="trademe">
+            window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+            (function(){
+              function retrieve(n){
+                var k= 'kx'+'trademe_'+n, ls=(function(){
+                  try {
+                    return window.localStorage;
+                  } catch(e) {
+                    return null;
+                  }
+                })();
+                if (ls) {
+                    return ls[k] || '';
+                } else if (navigator.cookieEnabled) {
+                    var m = document.cookie.match(k+'=([^;]*)');
+                    return (m && unescape(m[1])) || '';
+                } else {
+                    return '';
+                }
+              }
+              Krux.user = retrieve('user');
+              Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+            })();
+        </script>
+        <script>
+            (function () {
+                let intervalID = setInterval(() => {
+                    if (Krux.segments.length == 0) {
+                        return;
+                    }
+                    clearInterval(intervalID);
+                    parent.postMessage(Krux.segments, 'https://dev.trademe.nz:5000');
+                }, 500);
+            })();
+        </script>
+    </body>
+</html>
