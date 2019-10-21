@@ -2,6 +2,10 @@
     <head>
         <title>Control tag page</title>
         <!-- BEGIN ControlTag for "Trade Me" -->
+
+        <script>
+            
+        </script>
         <script async class="kxct" data-id="J6xELiDv" data-timing="async" data-version="3.0">
             window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
             (function(){
@@ -62,22 +66,33 @@
                 window.addEventListener('message', function(e) {
                     console.log('origin', e.origin); // outputs "http://www.example.com/"
                     console.log('event', e.data); // outputs "works!"
-                    // if (e.origin === 'https://example1.com') {
-                    //     // do something
-                    // }
+
+                    //TODO: check if data is null
+                    if ((e.data != null) && (typeof e.data === Object )) {
+                        console.log("of this works then nest 2nd if statement");
+                    }
+                    
+                    if (e.origin === 'https://dev.trademe.nz:5000') {
+                        window.dataLayer = e.data;
+                        sendToKrux(); 
+                    }
                 }, false);
 
             })();
 
-            //then send to Krux
-                // // Note: Requires JavaScript ControlTag to be deployed on the page
-                // // BEGIN AJAX ControlTag for "Trade Me"
-                // Krux('ns:trademe', 'page:load', function(err) {
-                // /* Optional, called just after the tags are finished loading.
-                //     If err is not null, then something went wrong. (err will be an instanceof Error or null.)
-                // */
-                // }, {pageView: true /* Set to false if you don't want this counted as a page view. */});
-                // // END AJAX ControlTag
+            function sendToKrux() {
+                console.log('send please');
+                // Note: Requires JavaScript ControlTag to be deployed on the page
+                // BEGIN AJAX ControlTag for "Trade Me"
+                Krux('ns:trademe', 'page:load', function(err) {
+                /* Optional, called just after the tags are finished loading.
+                    If err is not null, then something went wrong. (err will be an instanceof Error or null.)
+                */
+                }, {pageView: true /* Set to false if you don't want this counted as a page view. */});
+                // END AJAX ControlTag
+            }
+
+            
 
         </script>
     </body>
