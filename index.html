@@ -64,17 +64,18 @@
                 // })
 
                 window.addEventListener('message', function(e) {
-                    console.log('origin', e.origin); // outputs "http://www.example.com/"
-                    console.log('event', e.data); // outputs "works!"
-
-                    //TODO: check if data is null
-                    if ((e.data != null) && (typeof e.data === Object )) {
-                        console.log("of this works then nest 2nd if statement");
-                    }
-                    
                     if (e.origin === 'https://dev.trademe.nz:5000') {
-                        window.dataLayer = e.data;
-                        sendToKrux(); 
+                        console.log('origin', e.origin); // outputs "http://www.example.com/"
+                        console.log('event', e.data); // outputs "works!"
+                        
+                        //TODO: check if data is null
+                        if ((e.data != null) && (typeof e.data === 'object') && (!!JSON.stringify(e.data))) {
+                            console.log("data is okay");
+                            window.dataLayer = e.data;
+                            sendToKrux(); 
+                        }
+
+                        
                     }
                 }, false);
 
