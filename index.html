@@ -44,7 +44,8 @@
                         return;
                     }
                     clearInterval(intervalID);
-                    parent.postMessage(Krux.segments, 'https://dev.trademe.nz:5000');
+                    //parent.postMessage(Krux.segments, 'https://dev.trademe.nz:5000');
+                    parent.postMessage(Krux.segments, 'https://6a.test.trademe.nz');
                 }, 500);
             })();
 
@@ -60,7 +61,8 @@
                 // })
 
                 window.addEventListener('message', function(e) {
-                    if (e.origin === 'https://dev.trademe.nz:5000') {
+                    //if (e.origin === 'https://dev.trademe.nz:5000') {
+                    if (e.origin === 'https://6a.test.trademe.nz') {
                         console.log('origin', e.origin); // outputs "http://www.example.com/"
                         console.log('event', e.data); // outputs "works!"
                         
