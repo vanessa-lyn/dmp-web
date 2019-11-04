@@ -13,9 +13,3 @@ phases:
       # - ./gradlew assembleDebug
       # Sync the templates
       - aws s3 sync . s3://${S3_BUCKET}
-
- 
-# artifacts:
-#   files:
-#      - './android/app/build/outputs/**/*.apk'
-#   discard-paths: yes
