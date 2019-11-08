@@ -50,22 +50,24 @@
                     }
                     clearInterval(intervalID);
                     //parent.postMessage(Krux.segments, 'https://dev.trademe.nz:5000');
-                    parent.postMessage(Krux.segments, 'https://www.test6a.trademe.co.nz/a/);
+                    parent.postMessage(Krux.segments, 'https://www.test6a.trademe.co.nz/a/');
                 }, 500);
             })();
 
         </script>
         <script>
-
             //listen for data being sent from TM via the sandbox
-            (function() {
+            (function () {
                 window.addEventListener('message', function(e) {
                     //if (e.origin === 'https://dev.trademe.nz:5000') {
                     console.log('grabbing message');
+                    console.log('event', e);
+                    console.log('origin', e.origin); // outputs "http://www.example.com/"
 
                     if (e.origin === 'https://www.test6a.trademe.co.nz/a/') {
-                        console.log('origin', e.origin); // outputs "http://www.example.com/"
+                        
                         console.log('event', e.data); // outputs "works!"
+                        console.log('e.data is... ', typeof e.data);
                         
                         //TODO: check if data is null
                         if ((e.data != null) && (typeof e.data === 'object') && (!!JSON.stringify(e.data))) {
@@ -74,6 +76,12 @@
                             console.log("DL ", window.dataLayer);
                             sendToKrux(); 
                         }
+                        else {
+                            console.log('something is wrong with the data');
+                        }
+                    }
+                    else {
+                        console.log('not the origin');
                     }
                 }, false);
 
