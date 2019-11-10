@@ -88,6 +88,15 @@
             })();
 
             function sendToKrux() {
+                //adding script
+                console.log('adding control tag script');
+                window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
+                (function(){
+                var k=document.createElement('script');k.type='text/javascript';k.async=true;
+                k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/J7iwbVZL.js';
+                var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
+                }());
+
                 console.log('send please');
                 // Note: Requires JavaScript ControlTag to be deployed on the page
                 // BEGIN AJAX ControlTag for "Trade Me"
