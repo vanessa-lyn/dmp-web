@@ -2,22 +2,27 @@
     <head>
         <title>Control tag page</title>
         <script>
-            window.dataLayer = [{"userId":null,"dpId":null,"email":null,"listingId":2379369044,"title":"Daffy Duck Triptych Limited Edition Etching","categoryLevel1":"antiques-collectables","categoryLevel2":"movie-tv-memorabilia","categoryLevel3":"other","mcat":"187-6216-6231-","newOrUsed":"used","auctionOrClassified":"auction","sellerId":"m3/QrqJgqdFCSljgvyJJTXyBWcZspFcwH2U1BlBAWas=","sellerRegion":"Auckland","sellerDistrict":"Auckland City","sellerInTrade":"false","isBuyNow":"true","isPayNow":"false","isAfterpay":"false","buyNowPrice":500,"mustPickUp":"false","freeShipping":"false","url":"/Antiques-collectables/Movie-TV-memorabilia/Other/auction-listing-page","isExpired":false,"hasVideo":false,"hasPhotos":true,"tracked":true,"pageName":"marketplace_listing_page","isFeatured":true,"isSuperFeatured":true,"hasGtinCode":"false","wasPrice":0,"businessLine":"marketplace","band":"G04","propertyMapShown":false,"propertyMapHasSchoolsView":false,"propertyMapHasBoundaryView":false,"propertyMapHasStreetView":false,"jobsAgent":false,"showLuckyOrange":false,"abTestEventId":"307eaaf8-4b78-4b24-a7b0-a7349336d5df"},{"optOut":false},{"HarmonisationExperimentName":"HarmonisationExperiment1","HarmonisationExperimentVariant":"HarmonisationExperiment1CombinedVariant"},{"showLuckyOrange":false},{"gtm.start":1572907652467,"event":"gtm.js","gtm.uniqueEventId":0},{"event":"gtm.dom","gtm.uniqueEventId":2},{"event":"gtm.load","gtm.uniqueEventId":3}];
+            //var currentSite = 'https://www.test6a.trademe.co.nz/a/';
+            var currentSite = 'https://dev.trademe.nz:5000';
+            console.log(currentSite);
+            
+            // window.dataLayer = [{"userId":null,"dpId":null,"email":null,"listingId":2379369044,"title":"Daffy Duck Triptych Limited Edition Etching","categoryLevel1":"antiques-collectables","categoryLevel2":"movie-tv-memorabilia","categoryLevel3":"other","mcat":"187-6216-6231-","newOrUsed":"used","auctionOrClassified":"auction","sellerId":"m3/QrqJgqdFCSljgvyJJTXyBWcZspFcwH2U1BlBAWas=","sellerRegion":"Auckland","sellerDistrict":"Auckland City","sellerInTrade":"false","isBuyNow":"true","isPayNow":"false","isAfterpay":"false","buyNowPrice":500,"mustPickUp":"false","freeShipping":"false","url":"/Antiques-collectables/Movie-TV-memorabilia/Other/auction-listing-page","isExpired":false,"hasVideo":false,"hasPhotos":true,"tracked":true,"pageName":"marketplace_listing_page","isFeatured":true,"isSuperFeatured":true,"hasGtinCode":"false","wasPrice":0,"businessLine":"marketplace","band":"G04","propertyMapShown":false,"propertyMapHasSchoolsView":false,"propertyMapHasBoundaryView":false,"propertyMapHasStreetView":false,"jobsAgent":false,"showLuckyOrange":false,"abTestEventId":"307eaaf8-4b78-4b24-a7b0-a7349336d5df"},{"optOut":false},{"HarmonisationExperimentName":"HarmonisationExperiment1","HarmonisationExperimentVariant":"HarmonisationExperiment1CombinedVariant"},{"showLuckyOrange":false},{"gtm.start":1572907652467,"event":"gtm.js","gtm.uniqueEventId":0},{"event":"gtm.dom","gtm.uniqueEventId":2},{"event":"gtm.load","gtm.uniqueEventId":3}];
             console.log('on init ', window.dataLayer);
         </script>
 
         <!-- BEGIN ControlTag for "Trade Me Test" -->
-        <script class="kxct" data-id="J7iwbVZL" data-timing="async" data-version="3.0" type="text/javascript">
+        <!-- <script class="kxct" data-id="J7iwbVZL" data-timing="async" data-version="3.0" type="text/javascript">
             window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
             (function(){
             var k=document.createElement('script');k.type='text/javascript';k.async=true;
             k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/J7iwbVZL.js';
             var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
             }());
-        </script>
+        </script> -->
         <!-- END ControlTag -->
     </head>
     <body>
+
         <script class="kxint" data-namespace="trademe">
             window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
             (function(){
@@ -49,8 +54,7 @@
                         return;
                     }
                     clearInterval(intervalID);
-                    //parent.postMessage(Krux.segments, 'https://dev.trademe.nz:5000');
-                    parent.postMessage(Krux.segments, 'https://www.test6a.trademe.co.nz/a/');
+                    parent.postMessage(Krux.segments, currentSite);
                 }, 500);
             })();
 
@@ -59,12 +63,12 @@
             //listen for data being sent from TM via the sandbox
             (function () {
                 window.addEventListener('message', function(e) {
-                    //if (e.origin === 'https://dev.trademe.nz:5000') {
+                    
                     console.log('grabbing message');
                     console.log('event', e);
-                    console.log('origin', e.origin); // outputs "http://www.example.com/"
+                    console.log('origin', e.origin);
 
-                    if (e.origin === 'https://www.test6a.trademe.co.nz') {
+                    if (e.origin === currentSite) {
                         
                         console.log('event', e.data); // outputs "works!"
                         console.log('e.data is... ', typeof e.data);
@@ -99,14 +103,17 @@
 
                 console.log('send please');
                 // Note: Requires JavaScript ControlTag to be deployed on the page
-                // BEGIN AJAX ControlTag for "Trade Me"
+                // BEGIN AJAX ControlTag for "Trade Me Test"
                 Krux('ns:trademe', 'page:load', function(err) {
                 /* Optional, called just after the tags are finished loading.
                     If err is not null, then something went wrong. (err will be an instanceof Error or null.)
                 */
+                    if(err){console.log('Krux error='+err)}
+
                 }, {pageView: true /* Set to false if you don't want this counted as a page view. */});
                 // END AJAX ControlTag
             }
+
         </script>
     </body>
 </html>
