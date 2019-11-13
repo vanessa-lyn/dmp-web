@@ -7,7 +7,7 @@
             console.log(currentSite);
             
             // window.dataLayer = [{"userId":null,"dpId":null,"email":null,"listingId":2379369044,"title":"Daffy Duck Triptych Limited Edition Etching","categoryLevel1":"antiques-collectables","categoryLevel2":"movie-tv-memorabilia","categoryLevel3":"other","mcat":"187-6216-6231-","newOrUsed":"used","auctionOrClassified":"auction","sellerId":"m3/QrqJgqdFCSljgvyJJTXyBWcZspFcwH2U1BlBAWas=","sellerRegion":"Auckland","sellerDistrict":"Auckland City","sellerInTrade":"false","isBuyNow":"true","isPayNow":"false","isAfterpay":"false","buyNowPrice":500,"mustPickUp":"false","freeShipping":"false","url":"/Antiques-collectables/Movie-TV-memorabilia/Other/auction-listing-page","isExpired":false,"hasVideo":false,"hasPhotos":true,"tracked":true,"pageName":"marketplace_listing_page","isFeatured":true,"isSuperFeatured":true,"hasGtinCode":"false","wasPrice":0,"businessLine":"marketplace","band":"G04","propertyMapShown":false,"propertyMapHasSchoolsView":false,"propertyMapHasBoundaryView":false,"propertyMapHasStreetView":false,"jobsAgent":false,"showLuckyOrange":false,"abTestEventId":"307eaaf8-4b78-4b24-a7b0-a7349336d5df"},{"optOut":false},{"HarmonisationExperimentName":"HarmonisationExperiment1","HarmonisationExperimentVariant":"HarmonisationExperiment1CombinedVariant"},{"showLuckyOrange":false},{"gtm.start":1572907652467,"event":"gtm.js","gtm.uniqueEventId":0},{"event":"gtm.dom","gtm.uniqueEventId":2},{"event":"gtm.load","gtm.uniqueEventId":3}];
-            console.log('on init ', window.dataLayer);
+            //console.log('on init ', window.dataLayer);
         </script>
 
         <!-- BEGIN ControlTag for "Trade Me Test" -->
@@ -24,39 +24,39 @@
     <body>
 
         <script class="kxint" data-namespace="trademe">
-            // window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
-            // (function(){
-            //   function retrieve(n){
-            //     var k= 'kx'+'trademe_'+n, ls=(function(){
-            //       try {
-            //         return window.localStorage;
-            //       } catch(e) {
-            //         return null;
-            //       }
-            //     })();
-            //     if (ls) {
-            //         return ls[k] || '';
-            //     } else if (navigator.cookieEnabled) {
-            //         var m = document.cookie.match(k+'=([^;]*)');
-            //         return (m && unescape(m[1])) || '';
-            //     } else {
-            //         return '';
-            //     }
-            //   }
-            //   Krux.user = retrieve('user');
-            //   Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
-            // })();
+            window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+            (function(){
+              function retrieve(n){
+                var k= 'kx'+'trademe_'+n, ls=(function(){
+                  try {
+                    return window.localStorage;
+                  } catch(e) {
+                    return null;
+                  }
+                })();
+                if (ls) {
+                    return ls[k] || '';
+                } else if (navigator.cookieEnabled) {
+                    var m = document.cookie.match(k+'=([^;]*)');
+                    return (m && unescape(m[1])) || '';
+                } else {
+                    return '';
+                }
+              }
+              Krux.user = retrieve('user');
+              Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+            })();
         </script>
         <script>
-            // (function () {
-            //     let intervalID = setInterval(() => {
-            //         if (Krux.segments.length == 0) {
-            //             return;
-            //         }
-            //         clearInterval(intervalID);
-            //         parent.postMessage(Krux.segments, currentSite+'/a/');
-            //     }, 500);
-            // })();
+            (function () {
+                let intervalID = setInterval(() => {
+                    if (Krux.segments.length == 0) {
+                        return;
+                    }
+                    clearInterval(intervalID);
+                    parent.postMessage(Krux.segments, currentSite+'/a/');
+                }, 500);
+            })();
 
         </script>
         <script>
