@@ -2,7 +2,7 @@
     <head>
         <title>Control tag page</title>
         <script>
-            var currentSite = 'https://www.test6a.trademe.co.nz/';
+            var currentSite = 'https://www.test6a.trademe.co.nz';
             //var currentSite = 'https://dev.trademe.nz:5000';
             console.log(currentSite);
             
@@ -54,7 +54,7 @@
                         return;
                     }
                     clearInterval(intervalID);
-                    parent.postMessage(Krux.segments, currentSite+'a/');
+                    parent.postMessage(Krux.segments, currentSite+'/a/');
                 }, 500);
             })();
 
