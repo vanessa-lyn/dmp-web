@@ -24,39 +24,39 @@
     <body>
 
         <script class="kxint" data-namespace="trademe">
-            window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
-            (function(){
-              function retrieve(n){
-                var k= 'kx'+'trademe_'+n, ls=(function(){
-                  try {
-                    return window.localStorage;
-                  } catch(e) {
-                    return null;
-                  }
-                })();
-                if (ls) {
-                    return ls[k] || '';
-                } else if (navigator.cookieEnabled) {
-                    var m = document.cookie.match(k+'=([^;]*)');
-                    return (m && unescape(m[1])) || '';
-                } else {
-                    return '';
-                }
-              }
-              Krux.user = retrieve('user');
-              Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
-            })();
+            // window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+            // (function(){
+            //   function retrieve(n){
+            //     var k= 'kx'+'trademe_'+n, ls=(function(){
+            //       try {
+            //         return window.localStorage;
+            //       } catch(e) {
+            //         return null;
+            //       }
+            //     })();
+            //     if (ls) {
+            //         return ls[k] || '';
+            //     } else if (navigator.cookieEnabled) {
+            //         var m = document.cookie.match(k+'=([^;]*)');
+            //         return (m && unescape(m[1])) || '';
+            //     } else {
+            //         return '';
+            //     }
+            //   }
+            //   Krux.user = retrieve('user');
+            //   Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+            // })();
         </script>
         <script>
-            (function () {
-                let intervalID = setInterval(() => {
-                    if (Krux.segments.length == 0) {
-                        return;
-                    }
-                    clearInterval(intervalID);
-                    parent.postMessage(Krux.segments, currentSite+'/a/');
-                }, 500);
-            })();
+            // (function () {
+            //     let intervalID = setInterval(() => {
+            //         if (Krux.segments.length == 0) {
+            //             return;
+            //         }
+            //         clearInterval(intervalID);
+            //         parent.postMessage(Krux.segments, currentSite+'/a/');
+            //     }, 500);
+            // })();
 
         </script>
         <script>
