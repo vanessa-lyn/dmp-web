@@ -2,7 +2,7 @@
     <head>
         <title>Control tag page</title>
         <script>
-            var currentSite = 'https://www.test6a.trademe.co.nz/a/';
+            var currentSite = 'https://www.test6a.trademe.co.nz/';
             //var currentSite = 'https://dev.trademe.nz:5000';
             console.log(currentSite);
             
@@ -54,7 +54,7 @@
                         return;
                     }
                     clearInterval(intervalID);
-                    parent.postMessage(Krux.segments, currentSite);
+                    parent.postMessage(Krux.segments, currentSite+'a/');
                 }, 500);
             })();
 
@@ -64,14 +64,14 @@
             (function () {
                 window.addEventListener('message', function(e) {
                     
-                    console.log('grabbing message');
-                    console.log('event', e);
+                    // console.log('grabbing message');
+                    // console.log('event', e);
                     console.log('origin', e.origin);
 
                     if (e.origin === currentSite) {
                         
                         console.log('event', e.data); // outputs "works!"
-                        console.log('e.data is... ', typeof e.data);
+                        // console.log('e.data is... ', typeof e.data);
                         
                         //TODO: check if data is null
                         if ((e.data != null) && (typeof e.data === 'object') && (!!JSON.stringify(e.data))) {
