@@ -48,7 +48,8 @@
                             return;
                         }
                         clearInterval(intervalID);
-                        parent.postMessage(Krux.segments, parentWindow);
+                        //parent.postMessage(Krux.segments, parentWindow);
+                        parent.postMessage(Krux.segments, parentWindow + "/a/");
                     }, 500);
                 }
             })();
