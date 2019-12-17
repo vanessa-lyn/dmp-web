@@ -39,8 +39,8 @@
         </script>
         <script>
             (function () {
-                console.log("parent url", parent.document.location);
                 var parentWindow = window.document.location.ancestorOrigins[0];
+                console.log("parent url", parentWindow);
                 if (parentWindow.includes('trademe.co.nz')) {
                     console.log("hell yes");
                     let intervalID = setInterval(() => {
