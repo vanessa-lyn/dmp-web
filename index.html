@@ -39,7 +39,7 @@
         </script>
         <script>
             (function () {
-                console.log("krux segments", Krux.segments);
+                console.log("parent url", parent.document.location);
                 let intervalID = setInterval(() => {
                     if (Krux.segments.length == 0) {
                         return;
