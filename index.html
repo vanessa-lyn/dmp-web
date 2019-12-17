@@ -46,8 +46,6 @@
                             return;
                         }
                         clearInterval(intervalID);
-                        //parent.postMessage(Krux.segments, parentWindow + "/a/");
-                        // Making sure this will continue to work when the url for FrEnd changes
                         parent.postMessage(Krux.segments, parentWindow);
                     }, 500);
                 }
