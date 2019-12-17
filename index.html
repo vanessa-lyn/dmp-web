@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Control tag page</title>
+        <title>Control Tag</title>
         <!-- BEGIN ControlTag for "Trade Me" -->
         <script async class="kxct" data-id="J6xELiDv" data-timing="async" data-version="3.0">
             window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
@@ -40,15 +40,14 @@
         <script>
             (function () {
                 var parentWindow = window.document.location.ancestorOrigins[0];
-                console.log("parent url", parentWindow);
                 if (parentWindow.includes('trademe.co.nz')) {
-                    console.log("hell yes");
                     let intervalID = setInterval(() => {
                         if (Krux.segments.length == 0) {
                             return;
                         }
                         clearInterval(intervalID);
-                        //parent.postMessage(Krux.segments, parentWindow);
+                        // Making sure this will continue to work when the url for FrEnd changes
+                        parent.postMessage(Krux.segments, parentWindow);
                         parent.postMessage(Krux.segments, parentWindow + "/a/");
                     }, 500);
                 }
