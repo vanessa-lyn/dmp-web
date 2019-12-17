@@ -40,13 +40,17 @@
         <script>
             (function () {
                 console.log("parent url", parent.document.location);
-                let intervalID = setInterval(() => {
-                    if (Krux.segments.length == 0) {
-                        return;
-                    }
-                    clearInterval(intervalID);
-                    parent.postMessage(Krux.segments, 'https://dev.trademe.co.nz:5000/a/');
-                }, 500);
+                var parentWindow = window.document.location.ancestorOrigins[0];
+                if (parentWindow.includes('trademe.co.nz')) {
+                    console.log("hell yes");
+                    let intervalID = setInterval(() => {
+                        if (Krux.segments.length == 0) {
+                            return;
+                        }
+                        clearInterval(intervalID);
+                        parent.postMessage(Krux.segments, parentWindow);
+                    }, 500);
+                }
             })();
         </script>
     </body>
