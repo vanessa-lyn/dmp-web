@@ -71,35 +71,24 @@
             //listen for data being sent from TM via the sandbox
             (function () {
                 window.addEventListener('message', function(e) {
-                    
-                    // console.log('grabbing message');
-                    // console.log('event', e);
                     console.log('origin', e.origin);
                     console.log('endswith ', e.origin.endsWith('trademe.co.nz'), e.origin.endsWith('trademe.co.nz:5000'));
 
                     if ((e.origin.endsWith('trademe.co.nz')) || (e.origin.endsWith('trademe.co.nz:5000'))) {
-                        
-                        console.log('event', e.data); // outputs "works!"
-                        // console.log('e.data is... ', typeof e.data);
+                        console.log('event', e.data);
                         
                         if ((e.data != null) && (typeof e.data === 'object') && (!!JSON.stringify(e.data))) {
                             console.log("data is okay");
                             console.log("and it is", e.data);
 
-                            switch (e.data[0]) {
+                            switch (e.data['type']) {
                                 case "dataLayer":
-                                    window.dataLayer = e.data[1];
-                                    console.log("DL == ", window.dataLayer);
-                                    sendToKrux();
+                                    sendToKrux(e.data['data']);
                                     break;
                                 case "sponsoredTool":
-                                    toolTracking(e.data[1]);
+                                    toolTracking(e.data['data']);
                                     break;
                             }
-
-                            // window.dataLayer = e.data;
-                            // console.log("DL ", window.dataLayer);
-                            // sendToKrux(); 
                         }
                         else {
                             console.log('something is wrong with the data');
@@ -112,7 +101,10 @@
 
             })();
 
-            function sendToKrux() {
+            function sendToKrux(dLayer) {
+                window.dataLayer = dLayer;
+                console.log("DL == ", window.dataLayer);
+
                 console.log('send please');
                 // Note: Requires JavaScript ControlTag to be deployed on the page
                 // BEGIN AJAX ControlTag for "Trade Me Test"
