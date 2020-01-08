@@ -11,13 +11,13 @@
             }());
         </script> -->
         <!-- END ControlTag -->
-        <script class="kxct" data-id="J6xELiDv" data-timing="async" data-version="3.0" type="text/javascript">
+        <script class="kxct" data-id="J7iwbVZL" data-timing="async" data-version="3.0" type="text/javascript">
             //adding script
             console.log('adding control tag script');
             window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
             (function(){
             var k=document.createElement('script');k.type='text/javascript';k.async=true;
-            k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/J6xELiDv.js';
+            k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/J7iwbVZL.js';
             var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
             }());
         </script>
@@ -75,19 +75,31 @@
                     // console.log('grabbing message');
                     // console.log('event', e);
                     console.log('origin', e.origin);
-                    console.log('endswith ', e.origin.endsWith('trademe.co.nz'));
+                    console.log('endswith ', e.origin.endsWith('trademe.co.nz'), e.origin.endsWith('trademe.co.nz:5000'));
 
-                    if (e.origin.endsWith('trademe.co.nz')) {
+                    if ((e.origin.endsWith('trademe.co.nz')) || (e.origin.endsWith('trademe.co.nz:5000'))) {
                         
                         console.log('event', e.data); // outputs "works!"
                         // console.log('e.data is... ', typeof e.data);
                         
-                        //TODO: check if data is null
                         if ((e.data != null) && (typeof e.data === 'object') && (!!JSON.stringify(e.data))) {
                             console.log("data is okay");
-                            window.dataLayer = e.data;
-                            console.log("DL ", window.dataLayer);
-                            sendToKrux(); 
+                            console.log("and it is", e.data);
+
+                            switch (e.data[0]) {
+                                case "dataLayer":
+                                    window.dataLayer = e.data[1];
+                                    console.log("DL == ", window.dataLayer);
+                                    sendToKrux();
+                                    break;
+                                case "sponsoredTool":
+                                    toolTracking(e.data[1]);
+                                    break;
+                            }
+
+                            // window.dataLayer = e.data;
+                            // console.log("DL ", window.dataLayer);
+                            // sendToKrux(); 
                         }
                         else {
                             console.log('something is wrong with the data');
@@ -112,6 +124,19 @@
 
                 }, {pageView: false /* Set to false if you don't want this counted as a page view. */});
                 // END AJAX ControlTag
+            }
+
+            //sending event data when user interacts with a tool
+            // function toolTracking(evttype, tgt) {
+            //     console.log('send to dmp', advert, evttype, tgt);
+            //     window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+            //     Krux('ns:trademe','admEvent', 'M5yYu2nj', {event_type:'default', advertiser:advert, event:evttype, target:tgt});
+            // }
+
+            function toolTracking(event) {
+                console.log('send to dmp', event[0], event[1], event[2]);
+                window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+                Krux('ns:trademe','admEvent', 'M5yYu2nj', {event_type:'default', advertiser:event[0], event:event[1], target:event[2]});
             }
 
         </script>
