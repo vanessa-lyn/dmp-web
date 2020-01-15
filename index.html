@@ -22,11 +22,11 @@
             }());
         </script>
         <script>
-            window.dataLayer = [{"gtm.start":1578361863381,"event":"gtm.js","gtm.uniqueEventId":11},{"applePay":false,"applePayCard":false,"event":"frend-apple-pay-support","userId":"","frendVersion":"4cbe6bd8d44e","gtm.uniqueEventId":2},{"businessLine":"property"},{"categoryLevel1":"trade-me-property","categoryLevel2":"residential","categoryLevel3":"for-sale","category":"/Trade-Me-Property/Residential/For-Sale","canonicalPath":"/property/residential/sale/waikato/hamilton/frankton/listing/1809228979","vertical":"property","name":"Residential for sale","id":1809228979,"mcat":"0350-5748-3399-","auctionOrClassified":"classified","region":"Waikato","district":"Hamilton","isClosed":"false","sellerRegion":"Auckland","sellerDistrict":"Manukau","sellerInTrade":"false","hasPhotos":"true","hasVideo":"false","newOrUsed":"used","hasBuyNow":"false","hasPayNow":"false","freeShipping":"false","mustPickUp":"false","url":"/property/residential/sale/waikato/hamilton/frankton/listing/1809228979","event":"pageView","userId":"","frendVersion":"4cbe6bd8d44e","gtm.uniqueEventId":5},{"event":"gtm.dom","gtm.uniqueEventId":9},{"event":"gtm.load","gtm.uniqueEventId":12}];
+            window.dataLayer = [{"applePay":false,"applePayCard":false,"event":"frend-apple-pay-support","userId":"Ur8KXZ0VdhtNcMZeYo/i5KRBFNR4FFG6oVbhRJFO7HQ=","frendVersion":"4cbe6bd8d44e","gtm.uniqueEventId":2},{"businessLine":"property"},{"categoryLevel1":"trade-me-property","categoryLevel2":"residential","categoryLevel3":"for-sale","category":"/Trade-Me-Property/Residential/For-Sale","canonicalPath":"/property/residential/sale/waikato/hamilton/frankton/listing/1809228979","vertical":"property","name":"Residential for sale","id":1809228979,"mcat":"0350-5748-3399-","auctionOrClassified":"classified","region":"Waikato","district":"Hamilton","isClosed":"false","sellerRegion":"Auckland","sellerDistrict":"Manukau","sellerInTrade":"false","hasPhotos":"true","hasVideo":"false","newOrUsed":"used","hasBuyNow":"false","hasPayNow":"false","freeShipping":"false","mustPickUp":"false","url":"/property/residential/sale/waikato/hamilton/frankton/listing/1809228979","event":"pageView","userId":"","frendVersion":"4cbe6bd8d44e","gtm.uniqueEventId":5},{"event":"gtm.dom","gtm.uniqueEventId":9},{"event":"gtm.load","gtm.uniqueEventId":12}];
         </script>
     </head>
     <body>
-        <!-- <script class="kxint" data-namespace="trademe">
+        <script class="kxint" data-namespace="trademe">
             window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
             (function(){
               function retrieve(n){
@@ -46,8 +46,8 @@
                     return '';
                 }
               }
-              Krux.user = retrieve('user');
-              Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+            //   Krux.user = retrieve('user');
+            //   Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
             })();
         </script>
         <script>
@@ -63,7 +63,7 @@
                     }, 500);
                 }
             })();
-        </script> -->
+        </script>
 
 
         <!-- listening for data from TM then sending to krux -->
@@ -83,7 +83,7 @@
 
                             switch (e.data['type']) {
                                 case "dataLayer":
-                                    sendToKrux(e.data['data']);
+                                    sendDataLayerToKrux(e.data['data']);
                                     break;
                                 case "sponsoredTool":
                                     toolTracking(e.data['data']);
@@ -101,22 +101,45 @@
 
             })();
 
-            function sendToKrux(dLayer) {
+            // function grabSegments(user) {
+            //     Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+            // }
+
+            function sendDataLayerToKrux(dLayer) {
                 window.dataLayer = dLayer;
                 console.log("DL == ", window.dataLayer);
-
                 console.log('send please');
-                // Note: Requires JavaScript ControlTag to be deployed on the page
-                // BEGIN AJAX ControlTag for "Trade Me Test"
-                Krux('ns:trademe', 'page:load', function(err) {
-                /* Optional, called just after the tags are finished loading.
-                    If err is not null, then something went wrong. (err will be an instanceof Error or null.)
-                */
-                    if(err){console.log('Krux error='+err)}
 
-                }, {pageView: false /* Set to false if you don't want this counted as a page view. */});
-                // END AJAX ControlTag
+                sendUserId();
+
+                // ////
+                // // Note: Requires JavaScript ControlTag to be deployed on the page
+                // // BEGIN AJAX ControlTag for "Trade Me Test"
+                // Krux('ns:trademe', 'page:load', function(err) {
+                // /* Optional, called just after the tags are finished loading.
+                //     If err is not null, then something went wrong. (err will be an instanceof Error or null.)
+                // */
+                //     if(err){console.log('Krux error='+err)}
+
+                // }, {pageView: false /* Set to false if you don't want this counted as a page view. */});
+                // // END AJAX ControlTag
+                // ////
             }
+
+            var sendUserId = (function() {
+                console.log('send user ID function');
+                var memberIdSent = false;
+                console.log("memberIdSent: ", memberIdSent);
+                return function() {
+                    if (!memberIdSent) {
+                        memberIdSent = true;
+                        console.log('sending id now');
+                        Krux.user = retrieve('user');
+                        console.log("Krux.user: ",Krux.user);
+                        Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+                    }
+                };
+            })();
 
             //sending event data when user interacts with a tool
             // function toolTracking(evttype, tgt) {
