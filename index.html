@@ -51,18 +51,18 @@
             })();
         </script>
         <script>
-            (function () {
-                var parentWindow = window.document.location.ancestorOrigins[0];
-                if (parentWindow.includes('trademe.co.nz')) {
-                    let intervalID = setInterval(() => {
-                        if (Krux.segments.length == 0) {
-                            return;
-                        }
-                        clearInterval(intervalID);
-                        parent.postMessage(Krux.segments, parentWindow);
-                    }, 500);
-                }
-            })();
+            // (function () {
+            //     var parentWindow = window.document.location.ancestorOrigins[0];
+            //     if (parentWindow.includes('trademe.co.nz')) {
+            //         let intervalID = setInterval(() => {
+            //             if (Krux.segments.length == 0) {
+            //                 return;
+            //             }
+            //             clearInterval(intervalID);
+            //             parent.postMessage(Krux.segments, parentWindow);
+            //         }, 500);
+            //     }
+            // })();
         </script>
 
 
@@ -101,9 +101,6 @@
 
             })();
 
-            // function grabSegments(user) {
-            //     Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
-            // }
 
             function sendDataLayerToKrux(dLayer) {
                 window.dataLayer = dLayer;
@@ -127,20 +124,34 @@
             }
 
             var memberIdSent = false;
-            
+
             function sendUserId() {
                 console.log('send user ID function');
                 console.log("memberIdSent: ", memberIdSent);
-                // return function() {
-                    if (!memberIdSent) {
-                        memberIdSent = true;
-                        console.log('sending id now');
-                        Krux.user = retrieve('user');
-                        console.log("Krux.user: ",Krux.user);
-                        Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
-                    }
-                // };
+                if (!memberIdSent) {
+                    memberIdSent = true;
+                    console.log('sending id now');
+                    Krux.user = retrieve('user');
+                    console.log("Krux.user: ",Krux.user);
+                    Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+                    sendAudienceSegmentsToSite();
+                }
             }
+
+            function sendAudienceSegmentsToSite () {
+                console.log("sending segments back");
+                var parentWindow = window.document.location.ancestorOrigins[0];
+                if (parentWindow.includes('trademe.co.nz')) {
+                    let intervalID = setInterval(() => {
+                        if (Krux.segments.length == 0) {
+                            return;
+                        }
+                        clearInterval(intervalID);
+                        parent.postMessage(Krux.segments, parentWindow);
+                    }, 500);
+                }
+            }
+
 
             //sending event data when user interacts with a tool
             // function toolTracking(evttype, tgt) {
