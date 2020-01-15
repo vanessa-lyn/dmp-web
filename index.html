@@ -126,11 +126,12 @@
                 // ////
             }
 
+            var memberIdSent = false;
+            
             function sendUserId() {
                 console.log('send user ID function');
-                var memberIdSent = false;
                 console.log("memberIdSent: ", memberIdSent);
-                return function() {
+                // return function() {
                     if (!memberIdSent) {
                         memberIdSent = true;
                         console.log('sending id now');
@@ -138,7 +139,7 @@
                         console.log("Krux.user: ",Krux.user);
                         Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
                     }
-                };
+                // };
             }
 
             //sending event data when user interacts with a tool
