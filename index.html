@@ -29,28 +29,33 @@
     </head>
     <body>
         <script class="kxint" data-namespace="trademe">
-            // window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
-            // //(function(){
-            //   function retrieve(n){
-            //     var k= 'kx'+'trademe_'+n, ls=(function(){
-            //       try {
-            //         return window.localStorage;
-            //       } catch(e) {
-            //         return null;
-            //       }
-            //     })();
-            //     if (ls) {
-            //         return ls[k] || '';
-            //     } else if (navigator.cookieEnabled) {
-            //         var m = document.cookie.match(k+'=([^;]*)');
-            //         return (m && unescape(m[1])) || '';
-            //     } else {
-            //         return '';
-            //     }
-            //   }
-             //Krux.user = retrieve('user');
-               //Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
-            //})();
+            window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+            //(function(){
+              function retrieve(n){
+                var k= 'kx'+'trademe_'+n, ls=(function(){
+                  try {
+                    return window.localStorage;
+                  } catch(e) {
+                    return null;
+                  }
+                })();
+                if (ls) {
+                    return ls[k] || '';
+                } else if (navigator.cookieEnabled) {
+                    var m = document.cookie.match(k+'=([^;]*)');
+                    return (m && unescape(m[1])) || '';
+                } else {
+                    return '';
+                }
+              }
+               Krux.user = retrieve('user');
+               Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
+            // })();
+
+            </script>
+
+
+            <script>
              
             // (function () {
             //     var parentWindow = window.document.location.ancestorOrigins[0];
@@ -107,60 +112,25 @@
                 console.log("DL == ", window.dataLayer);
                 console.log('send please');
 
-                sendUserId();
+                
 
-                // ////
-                // // Note: Requires JavaScript ControlTag to be deployed on the page
-                // // BEGIN AJAX ControlTag for "Trade Me Test"
-                // Krux('ns:trademe', 'page:load', function(err) {
-                // /* Optional, called just after the tags are finished loading.
-                //     If err is not null, then something went wrong. (err will be an instanceof Error or null.)
-                // */
-                //     if(err){console.log('Krux error='+err)}
+                ////
+                // Note: Requires JavaScript ControlTag to be deployed on the page
+                // BEGIN AJAX ControlTag for "Trade Me Test"
+                Krux('ns:trademe', 'page:load', function(err) {
+                /* Optional, called just after the tags are finished loading.
+                    If err is not null, then something went wrong. (err will be an instanceof Error or null.)
+                */
+                    if(err){console.log('Krux error='+err)}
 
-                // }, {pageView: false /* Set to false if you don't want this counted as a page view. */});
-                // // END AJAX ControlTag
-                // ////
+                }, {pageView: false /* Set to false if you don't want this counted as a page view. */});
+                // END AJAX ControlTag
+                ////
+
+                sendAudienceSegmentsToSite();
             }
 
-            var memberIdSent = false;
-
-            function sendUserId() {
-                console.log('send user ID function');
-                console.log("memberIdSent: ", memberIdSent);
-                if (!memberIdSent) {
-                    memberIdSent = true;
-                    console.log('sending id now');
-
-                    /////
-                    window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
-                    (function(){
-                        function retrieve(n){
-                            var k= 'kx'+'trademe_'+n, ls=(function(){
-                            try {
-                                return window.localStorage;
-                            } catch(e) {
-                                return null;
-                            }
-                            })();
-                            if (ls) {
-                                return ls[k] || '';
-                            } else if (navigator.cookieEnabled) {
-                                var m = document.cookie.match(k+'=([^;]*)');
-                                return (m && unescape(m[1])) || '';
-                            } else {
-                                return '';
-                            }
-                            Krux.user = retrieve('user');
-                            Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
-                        }
-                    }());
-                    //////////
-                    
-                    sendAudienceSegmentsToSite();
-                }
-            }
-
+        
             function sendAudienceSegmentsToSite() {
                 console.log("sending segments back");
                 var parentWindow = window.document.location.ancestorOrigins[0];
