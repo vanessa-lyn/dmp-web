@@ -46,7 +46,7 @@
                     return '';
                 }
               }
-            Krux.user = retrieve('user');
+            // Krux.user = retrieve('user');
             //   Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
             //})();
         </script>
@@ -131,6 +131,7 @@
                 if (!memberIdSent) {
                     memberIdSent = true;
                     console.log('sending id now');
+                    Krux.user = retrieve('user');
                     Krux.segments = retrieve('segs') ? retrieve('segs').split(',') : [];
                     sendAudienceSegmentsToSite();
                 }
