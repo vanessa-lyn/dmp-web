@@ -13,15 +13,19 @@
             //test: J7iwbVZL
         </script> -->
         <!-- END ControlTag -->
-        <script class="kxct" data-id="J7iwbVZL" data-timing="async" data-version="3.0" type="text/javascript">
+        <script class="kxct" data-id="J6xELiDv" data-timing="async" data-version="3.0" type="text/javascript">
+        function implementControlTag () {
             //adding script
             console.log('adding control tag script');
             window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
-            (function(){
+            // (function(){
             var k=document.createElement('script');k.type='text/javascript';k.async=true;
-            k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/J7iwbVZL.js';
+            k.src=(location.protocol==='https:'?'https:':'http:')+'//cdn.krxd.net/controltag/J6xELiDv.js';
             var s=document.getElementsByTagName('script')[0];s.parentNode.insertBefore(k,s);
-            }());
+            // }());
+
+        }
+
         </script>
         <script>
             // window.dataLayer = [{'gtm.start': 1573601241034, 'event': 'gtm.js', 'gtm.uniqueEventId': 0},{'gtm.start': 1573601241034, 'event': 'gtm.js', 'gtm.uniqueEventId': 0},{"userId":"Ur8KXZ0VdhtNcMZeYo/i5KRBFNR4FFG6oVbhRJFO7HQ===","frendVersion":"4cbe6bd8d44e","gtm.uniqueEventId":2},{"categoryLevel1":"trade-me-property","categoryLevel2":"residential","categoryLevel3":"for-sale","category":"/Trade-Me-Property/Residential/For-Sale","canonicalPath":"/property/residential/sale/waikato/hamilton/frankton/listing/1809228979","vertical":"property","name":"Residential for sale","id":1809228979,"mcat":"0350-5748-3399-","auctionOrClassified":"classified","region":"Waikato","district":"Hamilton","isClosed":"false","sellerRegion":"Auckland","sellerDistrict":"Manukau","sellerInTrade":"false","hasPhotos":"true","hasVideo":"false","newOrUsed":"used","hasBuyNow":"false","hasPayNow":"false","freeShipping":"false","mustPickUp":"false","url":"/property/residential/sale/waikato/hamilton/frankton/listing/1809228979","event":"pageView","userId":"","frendVersion":"4cbe6bd8d44e","gtm.uniqueEventId":5},{"event":"gtm.dom","gtm.uniqueEventId":9},{"event":"gtm.load","gtm.uniqueEventId":12}];
@@ -112,22 +116,20 @@
                 console.log("DL == ", window.dataLayer);
                 console.log('send please');
 
-                
+                implementControlTag();
+                // ////
+                // // Note: Requires JavaScript ControlTag to be deployed on the page
+                // // BEGIN AJAX ControlTag for "Trade Me Test"
+                // Krux('ns:trademe', 'page:load', function(err) {
+                // /* Optional, called just after the tags are finished loading.
+                //     If err is not null, then something went wrong. (err will be an instanceof Error or null.)
+                // */
+                //     if(err){console.log('Krux error='+err)}
 
-                ////
-                // Note: Requires JavaScript ControlTag to be deployed on the page
-                // BEGIN AJAX ControlTag for "Trade Me Test"
-                Krux('ns:trademe', 'page:load', function(err) {
-                /* Optional, called just after the tags are finished loading.
-                    If err is not null, then something went wrong. (err will be an instanceof Error or null.)
-                */
-                    if(err){console.log('Krux error='+err)}
+                // }, {pageView: false /* Set to false if you don't want this counted as a page view. */});
+                // // END AJAX ControlTag
+                // ////
 
-                }, {pageView: false /* Set to false if you don't want this counted as a page view. */});
-                // END AJAX ControlTag
-                ////
-
-                // sendAudienceSegmentsToSite();
             }
 
         
